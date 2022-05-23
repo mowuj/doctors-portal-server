@@ -49,7 +49,7 @@ async function run() {
         //step 7: set available to slots to make it easier 
         service.slots = available;
       });
-     
+    
 
       res.send(services);
     })
@@ -61,6 +61,13 @@ async function run() {
        * app.patch('/booking/:id)//
        * app.patch('/booking/:id)//
        */
+      app.get('/booking', async(req, res) =>{
+        const patient = req.query.patient;
+        
+      const query = {patient: patient};
+      const bookings = await bookingCollection.find(query).toArray();
+      res.send(bookings);
+    })
       app.post('/booking', async (req, res) => {
         const booking = req.body;
         const query={treatment:booking.treatment,date:booking.date,patient:booking.patient}
