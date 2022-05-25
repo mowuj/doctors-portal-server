@@ -158,6 +158,13 @@ async function run() {
         const result = await doctorCollection.insertOne(doctor);
         res.send(result);
       })
+      //pg*3gN2j8?4!L_4967 send email pass
+      app.delete('/doctor/:email',verifyJWT,verifyAdmin, async (req, res) => {
+        const email = req.params.email;
+        const filter = { email: email };
+        const result = await doctorCollection.deleteOne(filter);
+        res.send(result);
+      })
     }
     finally {
         
